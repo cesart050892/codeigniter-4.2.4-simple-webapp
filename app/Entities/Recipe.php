@@ -18,4 +18,13 @@ class Recipe extends Entity
     protected $datamap = [];
     protected $dates   = ['created_at', 'updated_at', 'deleted_at'];
     protected $casts   = [];
+
+    // This function is automatically called when you set the value of $recipe->title
+    public function setTitle(string $title)
+    {
+        $this->attributes['title'] = $title;
+
+        // Automatically define the "slug" from the recipe title.
+        $this->attributes['slug'] = mb_url_title($title, '-', TRUE);
+    }
 }
