@@ -20,11 +20,13 @@ class RecipesController extends BaseController
             'page_title' => "My Recipes",
             'page_subtitle' => "I present you my favorite recipes...",
             'recipes' => $myRecipes->getListRecipes(),
+            // Pass the paginnation class instance to the view
+            'pager' => $myRecipes->recipeModel->pager,
         ];
 
         /* Each of the items in the $data array will be accessible
          * in the view by variables with the same name as the key:
-         * $page_title, $page_subtitle and $recipes
+         * $page_title, $page_subtitle, $recipes and $pager
          */
         return view('recipe_list', $data);
     }

@@ -48,7 +48,7 @@
                     <?php endforeach; ?>
                 </ul>
                 <h5>Instructions</h5>
-                <p><?= esc($recipe->instructions) ?></p>
+                <p><?= nl2br(esc($recipe->instructions)) ?></p>
             </article>
         </div>
 

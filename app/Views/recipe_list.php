@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @var string $page_title                   The page title (automatically created by CI from the $data array)
- * @var string $page_subtitle                The page subtitle (automatically created by CI from the $data array)
- * @var array  $recipes                      List of recipes (automatically created by CI from the $data array)
- * @var App\Entities\Recipe $recipe          One recipe (created by the foreach instruction)
+ * @var string $page_title                       The page title (automatically created by CI from the $data array)
+ * @var string $page_subtitle                    The page subtitle (automatically created by CI from the $data array)
+ * @var array  $recipes                          List of recipes (automatically created by CI from the $data array)
+ * @var App\Entities\Recipe $recipe              One recipe (created by the foreach instruction)
+ * @var \CodeIgniter\Pager\PagerRenderer $pager  Pagination class instance
  */
 ?>
 <!DOCTYPE html>
@@ -41,12 +42,14 @@
 
         <div class="container">
 
-            <h3>List of recipe by slug</h3>
+            <h3>List of recipe</h3>
             <ul>
                 <?php foreach ($recipes as $recipe) : ?>
                     <li><?= anchor('recipe/' . $recipe->slug, $recipe->title) ?></li>
                 <?php endforeach; ?>
             </ul>
+
+            <?= $pager->links('default', 'bootstrap') ?>
 
         </div>
 

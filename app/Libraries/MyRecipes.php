@@ -7,31 +7,13 @@ use App\Models\IngredientModel;
 
 class MyRecipes
 {
-    /**
-     * Get all recipes
-     * @return array
-     */
-    public function getAllRecipes()
+    public $recipeModel;
+    public $ingredientModel;
+
+    public function __construct()
     {
-        // Create an instance for our two models
-        $recipeModel = new RecipeModel();
-        $ingredientModel = new IngredientModel();
-
-        // SELECT the recipes, order by id
-        $recipes = $recipeModel
-            ->orderBy('id')
-            ->findAll();
-
-        // For each recipe, SELECT its ingredients
-        foreach ($recipes as &$recipe) {
-            $recipe->ingredients = $ingredientModel
-                ->where(['recipe_id' => $recipe->id])
-                ->orderBy('id')
-                ->findAll();
-        }
-        unset($recipe);
-
-        return $recipes;
+        $this->recipeModel = new RecipeModel();
+        $this->ingredientModel = new IngredientModel();
     }
 
     /**
@@ -40,13 +22,12 @@ class MyRecipes
      */
     public function getListRecipes()
     {
-        $recipeModel = new RecipeModel();
-
         // Only get id, slug and title fields
-        $recipes = $recipeModel
-            ->select('id, slug, title')
+        $this->recipeModel->select('id, slug, title');
+
+        $recipes = $this->recipeModel
             ->orderBy('id')
-            ->findAll();
+            ->paginate();
 
         return $recipes;
     }
@@ -58,14 +39,11 @@ class MyRecipes
      */
     public function getRecipeById(int $id)
     {
-        $recipeModel = new RecipeModel();
-        $ingredientModel = new IngredientModel();
-
         // Get the recipe by its id
-        $recipe = $recipeModel->find($id);
+        $recipe = $this->recipeModel->find($id);
 
         if ($recipe !== null) {
-            $recipe->ingredients = $ingredientModel
+            $recipe->ingredients = $this->ingredientModel
                 ->where(['recipe_id' => $recipe->id])
                 ->orderBy('id')
                 ->findAll();
@@ -81,14 +59,11 @@ class MyRecipes
      */
     public function getRecipeBySlug(string $slug)
     {
-        $recipeModel = new RecipeModel();
-        $ingredientModel = new IngredientModel();
-
         // Get the recipe by its slug
-        $recipe = $recipeModel->where('slug', $slug)->first();
+        $recipe = $this->recipeModel->where('slug', $slug)->first();
 
         if ($recipe !== null) {
-            $recipe->ingredients = $ingredientModel
+            $recipe->ingredients = $this->ingredientModel
                 ->where(['recipe_id' => $recipe->id])
                 ->orderBy('id')
                 ->findAll();
