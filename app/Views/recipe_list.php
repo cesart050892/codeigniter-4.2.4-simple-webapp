@@ -41,13 +41,6 @@
 
         <div class="container">
 
-            <h3>List of recipe by id</h3>
-            <ul>
-                <?php foreach ($recipes as $recipe) : ?>
-                    <li><?= anchor('recipe/' . $recipe->id, $recipe->title) ?></li>
-                <?php endforeach; ?>
-            </ul>
-
             <h3>List of recipe by slug</h3>
             <ul>
                 <?php foreach ($recipes as $recipe) : ?>
