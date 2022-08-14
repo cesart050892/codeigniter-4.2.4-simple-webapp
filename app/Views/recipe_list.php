@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @var string $page_title     The page title (automatically created by CI from the $data array)
- * @var string $page_subtitle  The page subtitle (automatically created by CI from the $data array)
- * @var array  $recipes        List of recipes (automatically created by CI from the $data array)
- * @var array  $recipe         One recipe (created by the foreach instruction)
- * @var string $ingredient     One ingredient (created by the foreach instruction)
+ * @var string $page_title                   The page title (automatically created by CI from the $data array)
+ * @var string $page_subtitle                The page subtitle (automatically created by CI from the $data array)
+ * @var array  $recipes                      List of recipes (automatically created by CI from the $data array)
+ * @var App\Entities\Recipe $recipe          One recipe (created by the foreach instruction)
+ * @var App\Entities\Ingredient $ingredient  One ingredient (created by the foreach instruction)
  */
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,15 +44,15 @@
 
             <?php foreach ($recipes as $recipe) : ?>
                 <article>
-                    <h3><?= esc($recipe['title']) ?></h3>
+                    <h3><?= esc($recipe->title) ?></h3>
                     <h5>Ingredients</h5>
                     <ul>
-                        <?php foreach ($recipe['ingredients'] as $ingredient) : ?>
-                            <li><?= esc($ingredient) ?></li>
+                        <?php foreach ($recipe->ingredients as $ingredient) : ?>
+                            <li><?= esc($ingredient->quantity) ?> <?= esc($ingredient->name) ?></li>
                         <?php endforeach; ?>
                     </ul>
                     <h5>Instructions</h5>
-                    <p><?= esc($recipe['instructions']) ?></p>
+                    <p><?= esc($recipe->instructions) ?></p>
                 </article>
                 <hr>
             <?php endforeach; ?>
