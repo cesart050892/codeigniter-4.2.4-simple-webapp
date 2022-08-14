@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class RecipeModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'recipes';
+    protected $table            = 'recipe';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

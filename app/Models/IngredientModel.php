@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class IngredientModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'ingredients';
+    protected $table            = 'ingredient';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
