@@ -117,4 +117,58 @@ class RecipesController extends BaseController
 
         return view('recipe', $data);
     }
+
+    public function create()
+    {
+        // Load the form helpers
+        helper('form');
+
+        // Load the configuration for our application
+        $config = config('Recipe');
+
+        $data = [
+            'page_title' => "New recipe",
+            'max_ingredient' => $config->nb_ingredient,
+        ];
+
+        return view('form_recipe', $data);
+    }
+
+    public function edit(int $id)
+    {
+        // Create an instance of our library
+        $myRecipes = new MyRecipes();
+
+        // Load the form helpers
+        helper('form');
+
+        // Load the configuration for our application
+        $config = config('Recipe');
+
+        $data = [
+            'page_title' => "Edit a recipe",
+            'max_ingredient' => $config->nb_ingredient,
+        ];
+
+        /* Get the recipe for the id received in parameter.
+     * If the recipe does not exist, throw a page not found exception (404 error)
+     */
+        if (!$data['recipe'] = $myRecipes->getRecipeById($id)) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        return view('form_recipe', $data);
+    }
+
+    public function delete(int $id)
+    {
+        // TODO  
+        log_message('debug', "Delete recipe id $id");
+    }
+
+    public function save(int $id = null)
+    {
+        // TODO
+        log_message('debug', ($id === null) ? "Save new recipe" : "Save recipe id $id");
+    }
 }

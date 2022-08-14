@@ -61,6 +61,12 @@ $routes->match(['get', 'post'], '/', 'RecipesController::index');
 $routes->get('recipe/(:num)', 'RecipesController::recipeById/$1');
 $routes->get('recipe/(:slug)', 'RecipesController::recipeBySlug/$1');
 
+//plan the routes for our new features. 
+$routes->get('/create', 'RecipesController::create');
+$routes->get('/edit/(:num)', 'RecipesController::edit/$1');
+$routes->get('/delete/(:num)', 'RecipesController::delete/$1');
+$routes->post('/save', 'RecipesController::save');
+$routes->post('/save/(:num)', 'RecipesController::save/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

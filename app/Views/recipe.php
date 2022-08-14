@@ -50,12 +50,30 @@
                 <h5>Instructions</h5>
                 <p><?= nl2br(esc($recipe->instructions)) ?></p>
             </article>
+
+            <div>
+                <?= anchor(
+                    "/edit/{$recipe->id}",
+                    'Edit',
+                    ['class' => 'btn btn-outline-primary']
+                ) ?>
+
+                <?= anchor(
+                    "/delete/{$recipe->id}",
+                    'Delete',
+                    [
+                        'class' => 'btn btn-outline-danger',
+                        'onClick' => "return confirm('Do you really want to delete this recipe?');"
+                    ]
+                ) ?>
+            </div>
+
         </div>
 
     </main>
 
     <footer>
-        <p class="text-center">&copy; 2020 My recipe website</p>
+        <p class="text-center">&copy; 2021 <?= anchor('/', "My recipe website") ?></p>
     </footer>
 
 </body>
