@@ -6,31 +6,57 @@ use CodeIgniter\Database\Seeder;
 
 class Recipe extends Seeder
 {
-
     public function run()
     {
-        $model = model('recipeModel');
+        // Get an instance of the Query Builder for the RECIPE table
+        $qb_recipe = $this->db->table('recipe');
 
-        $array = [
-            [
-                "title" => "Boiling Water",
-                "slug" => "boiling-water",
-                "instructions" => "Put the water in a cauldron and boil.",
-            ],
-            [
-                "title" => "Tea",
-                "slug" => "tea",
-                "instructions" => "Prepare the recipe for boiling water. Put the water in a cup, add the tea bag and let it steep for a few minutes.",
-            ],
-            [
-                "title" => "Glass of water",
-                "slug" => "glass-of-water",
-                "instructions" => "Put ice cubes in a tall glass and fill with water. Add a slice of lemon if desired.",
-            ],
-        ];
+        // Get an instance of the Query Builder for th INGREDIENT table
+        $qb_ingredient = $this->db->table('ingredient');
 
-        foreach ($array as $value) {
-            $model->insert($value);
+        // Number of dummy recipe to create
+        $nb_recipe = 500;
+
+        // Loop 500 times
+        for ($recipe_no = 1; $recipe_no <= $nb_recipe; $recipe_no++) {
+            // Define a dummy recipe
+            $recipe = [
+                'title'  => "Dummy recipe {$recipe_no}",
+                'slug' => "dummy-recipe-no-{$recipe_no}",
+                'instructions' => <<<EOT
+                    Add all the ingredients to a baking dish.
+                    Bake at 350 °F (180 °C) for 45 minutes.
+                    EOT
+            ];
+
+            // Insert this recipe
+            $qb_recipe->insert($recipe);
+
+            // Get the ID of the inserted recipe
+            $recipe_id = $this->db->insertID();
+            log_message('debug', "Inserted ID: $recipe_id");
+
+            // Define 3 dummy ingredients associated to this recipe
+            $ingredients = [
+                [
+                    'name' => "Ingredient A",
+                    'quantity'  => "200 g",
+                    'recipe_id'  => $recipe_id
+                ],
+                [
+                    'name' => "Ingredient B",
+                    'quantity'  => "50 g",
+                    'recipe_id'  => $recipe_id
+                ],
+                [
+                    'name' => "Ingredient C",
+                    'quantity'  => "25 g",
+                    'recipe_id'  => $recipe_id
+                ]
+            ];
+
+            // Insert these 3 ingredients
+            $qb_ingredient->insertBatch($ingredients);
         }
     }
 }
