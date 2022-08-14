@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Entities\Ingredient;
 use CodeIgniter\Model;
 
 class IngredientModel extends Model
@@ -11,7 +12,7 @@ class IngredientModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = Ingredient::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [

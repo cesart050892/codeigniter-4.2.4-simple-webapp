@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Entities\Recipe;
 use CodeIgniter\Model;
 
 class RecipeModel extends Model
@@ -11,7 +12,7 @@ class RecipeModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = Recipe::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
