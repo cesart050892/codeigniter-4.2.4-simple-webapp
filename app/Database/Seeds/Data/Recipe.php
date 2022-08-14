@@ -14,14 +14,17 @@ class Recipe extends Seeder
         $array = [
             [
                 "title" => "Boiling Water",
+                "slug" => "boiling-water",
                 "instructions" => "Put the water in a cauldron and boil.",
             ],
             [
                 "title" => "Tea",
+                "slug" => "tea",
                 "instructions" => "Prepare the recipe for boiling water. Put the water in a cup, add the tea bag and let it steep for a few minutes.",
             ],
             [
                 "title" => "Glass of water",
+                "slug" => "glass-of-water",
                 "instructions" => "Put ice cubes in a tall glass and fill with water. Add a slice of lemon if desired.",
             ],
         ];

@@ -17,6 +17,7 @@ class RecipeModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'title',
+        'slug',
         'instructions'
     ];
 

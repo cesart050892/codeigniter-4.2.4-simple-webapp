@@ -28,6 +28,10 @@ class Recipe extends Migration
                 'type' => 'varchar',
                 'constraint' => 100
             ],
+            'slug' => [
+                'type' => 'varchar',
+                'constraint' => 255
+            ],
             'instructions' => [
                 'type' => 'text'
             ],
