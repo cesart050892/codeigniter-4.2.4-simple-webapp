@@ -57,7 +57,7 @@ $routes->set404Override();
 $routes->addPlaceholder('slug', '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*');
 
 // Define routes for /, recipe/id and recipe/slug
-$routes->get('/', 'RecipesController::index');
+$routes->match(['get', 'post'], '/', 'RecipesController::index');
 $routes->get('recipe/(:num)', 'RecipesController::recipeById/$1');
 $routes->get('recipe/(:slug)', 'RecipesController::recipeBySlug/$1');
 

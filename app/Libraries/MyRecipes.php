@@ -18,16 +18,28 @@ class MyRecipes
 
     /**
      * Get the list of recipes
+     * @param array $search
      * @return array
      */
-    public function getListRecipes()
+    public function getListRecipes(array $search)
     {
         // Only get id, slug and title fields
         $this->recipeModel->select('id, slug, title');
 
+        // If we do a text search, look in the title and instructions
+        if (!empty($search['text'])) {
+            $this->recipeModel
+                ->like('title', $search['text'])
+                ->orLike('instructions', $search['text']);
+        }
+
+        // If we don't ask for a specific number of recipe per page, get the default value
+        $nb_per_page = !empty($search['nb_per_page']) ? $search['nb_per_page'] : null;
+
+        // Add the sort order and pagination, then return the results
         $recipes = $this->recipeModel
             ->orderBy('id')
-            ->paginate();
+            ->paginate($nb_per_page);
 
         return $recipes;
     }
