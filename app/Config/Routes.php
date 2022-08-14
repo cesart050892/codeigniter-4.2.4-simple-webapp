@@ -35,8 +35,31 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-// Define the route for '/'
+
+/**
+ * slug placeholder:
+ *
+ *  [a-z0-9]+     # One or more repetition of given characters
+ *  (?:           # A non-capture group.
+ *    -           # A hyphen
+ *    [a-z0-9]+   # One or more repetition of given characters
+ *  )*            # Zero or more repetition of previous group
+ *
+ *  This will match:
+ *  - A sequence of alphanumeric characters at the beginning.
+ *  - Then it will match a hyphen, then a sequence of alphanumeric characters, 0 or more times.
+ *
+ * Examples :
+ *   item12345
+ *   some-blog-article
+ *
+ */
+$routes->addPlaceholder('slug', '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*');
+
+// Define routes for /, recipe/id and recipe/slug
 $routes->get('/', 'RecipesController::index');
+$routes->get('recipe/(:num)', 'RecipesController::recipeById/$1');
+$routes->get('recipe/(:slug)', 'RecipesController::recipeBySlug/$1');
 
 /*
  * --------------------------------------------------------------------
